@@ -103,7 +103,7 @@ var confirmPass;
                                     icon: Icon(Icons.admin_panel_settings_sharp),
                                     border: OutlineInputBorder()
                                 ),
-                                validator: (value){
+                                validator: (value){ //validasi input
                                   confirmPass = value;
                                   if(value == null || value.isEmpty){
                                     return 'Password tidak boleh kosong';
