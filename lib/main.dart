@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             color: Colors.white
           ),
         ),
-        image: Image.asset('assets/logoUnair.png'),
+        image: Image.asset('assets/logo_Splash.png'),
         photoSize: 125,
         backgroundColor: Colors.black,
         loaderColor: Colors.white,
