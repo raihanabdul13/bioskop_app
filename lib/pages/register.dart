@@ -38,16 +38,15 @@ var confirmPass;
                         backgroundColor: Colors.white,
                         child: Image.asset(
                           'assets/user.png',
-                          height: 150,
+                          height: 200,
                           color: Colors.deepPurple,
                         ),
-                        radius: 80,
+                        radius: 75,
                       )
                     ),
                     Form(
                       key: _formKey,
                       child: Container(
-                        padding: EdgeInsets.all(10),
                         child: Column(
                           children: <Widget>[
                             Container(
