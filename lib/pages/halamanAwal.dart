@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'login.dart';
 class firstPage extends StatelessWidget{
 
   @override
@@ -74,7 +75,14 @@ class firstPage extends StatelessWidget{
                 ),
                 GestureDetector(
                   onTap: (){
-                    print("Hello World");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context){
+                            return loginPage();
+                          }
+                      )
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.only(top: 20),

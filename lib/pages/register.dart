@@ -85,6 +85,9 @@ var confirmPass;
                                   if(value == null || value.isEmpty){
                                     return 'Email tidak boleh kosong';
                                   }
+                                  if(!value.contains("@")){
+                                    return 'Tidak terdapat @';
+                                  }
                                   if(value.length > 50){
                                     return 'Email is so long, max 50 characters';
                                   }
