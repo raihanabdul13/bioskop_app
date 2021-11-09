@@ -1,5 +1,6 @@
 
 
+import 'package:bioskop_app/pages/genre.dart';
 import 'package:bioskop_app/pages/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -112,9 +113,20 @@ class loginPage extends StatelessWidget{
                         if (_formKey.currentState!.validate()) {
                           // If the form is valid, display a snackbar. In the real world,
                           // you'd often call a server or save the information in a database.
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context){
+                                    return genrePage();
+                                  }
+                              )
+                          );
+                          /*
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Login')),
                           );
+                           */
                         }
                       },
                       child: Icon(Icons.arrow_forward_sharp,color:Colors.white),

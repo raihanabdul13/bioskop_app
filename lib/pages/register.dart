@@ -1,4 +1,5 @@
 
+import 'package:bioskop_app/pages/genre.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -148,8 +149,17 @@ var confirmPass;
                                   if (_formKey.currentState!.validate()) {
                                     // If the form is valid, display a snackbar. In the real world,
                                     // you'd often call a server or save the information in a database.
+                                    /*
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Processing Data Register')),
+                                    );
+                                     */
+                                    Navigator.pop(context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context){
+                                              return genrePage();
+                                            }
+                                        )
                                     );
                                   }
                                 },
