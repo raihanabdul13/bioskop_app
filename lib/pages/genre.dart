@@ -1,8 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class genrePage extends StatelessWidget{
+class genrePage extends StatefulWidget{
+genreState createState()=> genreState();
+}
+class genreState extends State<genrePage>{
+  int checkedIndex =0;
+  int checkedIndex2 =0;
+  List titleBahasa = [
+    "indonesia",
+    "china",
+    "Jawa",
+    "Japan",
+  ];
 
+  List titleGenre = [
+    "Action",
+    "Fantasy",
+    "Adventure",
+    "Horror",
+    "romance",
+    "Isekai",
+  ];
+  String genre='';
+  String bahasa ='';
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -15,21 +36,23 @@ class genrePage extends StatelessWidget{
             appBar: AppBar(
               title: Text('ini Genre'),
               iconTheme: IconThemeData(
-                color: Colors.black
+                  color: Colors.black
               ),
               backgroundColor: Colors.transparent,
               elevation: 0.0,
             ),
             body: ListView(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               children:<Widget>[
                 Container(
                   margin:EdgeInsets.only(top: 10,left: 20),
                   child: Text(
-                      'Please Select',
+                    'Please Select',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black
+                      color: Colors.black,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -37,171 +60,7 @@ class genrePage extends StatelessWidget{
                 Container(
                   margin: EdgeInsets.only(left: 20,bottom: 20),
                   child: Text(
-                      'Your Favorit Genre',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                GridView.count(
-                  primary: false,
-                  shrinkWrap: true,
-                  childAspectRatio: (itemWidth / itemHeight),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: 2,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                        bottom: 10,
-                        left: 20,
-                        right: 10
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Horor',
-                          style: TextStyle(
-                              color: Colors.black
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 10,
-                          right: 20
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Action'),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 20,
-                          right: 10
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Echii'),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 10,
-                          right: 20
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Fantasy'),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 20,
-                          right: 10
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Adventure'),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 10,
-                          right: 20
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Harem'),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  margin:EdgeInsets.only(top: 20,left: 20),
-                  child: Text(
-                    'Movie Language',
+                    'Your Favorit Genre',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -209,6 +68,19 @@ class genrePage extends StatelessWidget{
                     ),
                     textAlign: TextAlign.left,
                   ),
+                ),
+                GridView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.all(10),
+                    itemCount: titleGenre.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: (itemWidth / itemHeight),
+                    ),
+                    itemBuilder: (BuildContext context, int index){
+
+                      return buildCard(index);
+                    }
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 20,bottom: 20),
@@ -222,113 +94,25 @@ class genrePage extends StatelessWidget{
                     textAlign: TextAlign.left,
                   ),
                 ),
-                GridView.count(
-                  primary: false,
-                  shrinkWrap: true,
-                  childAspectRatio: (itemWidth / itemHeight),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: 2,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 20,
-                          right: 10
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Indonesia'),
-                      ),
+                GridView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.all(10),
+                    itemCount: titleBahasa.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: (itemWidth / itemHeight),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 10,
-                          right: 20
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Chinna'),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 20,
-                          right: 10
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('Jappanes'),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 10,
-                          bottom: 10,
-                          left: 10,
-                          right: 20
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text('English'),
-                      ),
-                    ),
-                  ],
+                    itemBuilder: (BuildContext context, int index){
+                      bahasa = titleBahasa[index];
+                      return buildCard2(index);
+                    }
                 ),
               ],
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 // Add your onPressed code here!
+                SnackBarDisplay(bahasa,genre);
               },
               child: const Icon(Icons.arrow_forward_sharp),
               backgroundColor: Colors.purple,
@@ -344,4 +128,110 @@ class genrePage extends StatelessWidget{
       ),
     );
   }
+  //Card2
+  Widget buildCard2(int index){
+
+    bool checked = index == checkedIndex;
+    String name = titleBahasa[index];
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          checkedIndex = index;
+          bahasa = titleBahasa[index];
+        });
+      },
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(5),
+            child: Card(
+              color: checked ? Colors.orange : Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Container(
+                child: Center(child: Text(name)),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 12,
+            right: 12,
+            child: Offstage(
+              offstage: !checked,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle
+                ),
+                child: Icon(
+                  Icons.check,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+  //card1
+  Widget buildCard(int index){
+
+    bool checked2 = index == checkedIndex2;
+    String name = titleGenre[index];
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          checkedIndex2 = index;
+          genre = titleGenre[index];
+        });
+      },
+      child: Stack(
+        children: <Widget>[
+          Container(
+            height: 100,
+            padding: EdgeInsets.all(5),
+            child: Card(
+              elevation: 2,
+              color: checked2 ? Colors.orange : Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Container(
+                child: Center(child: Text(name)),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 12,
+            right: 12,
+            child: Offstage(
+              offstage: !checked2,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle
+                ),
+                child: Icon(
+                  Icons.check,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+  void SnackBarDisplay(String bahasa, String genre){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text('Genre : '+ genre +' dan bahasa : '+bahasa)
+      ),
+    );
+  }
 }
+
+
+
