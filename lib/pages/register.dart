@@ -1,10 +1,17 @@
+import 'package:bioskop_app/pages/pressLogin.dart';
 
+import '../Model/User.dart';
+import 'package:bioskop_app/Model/User.dart';
 import 'package:bioskop_app/pages/genre.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class registerPage extends StatelessWidget{
 final _formKey = GlobalKey<FormState>();
+TextEditingController _nama = TextEditingController();
+TextEditingController _email = TextEditingController();
+TextEditingController _password = TextEditingController();
+final user = User(nama: '',email:'' , password: '');
 var confirmPass;
   @override
   Widget build(BuildContext context) {
@@ -53,6 +60,7 @@ var confirmPass;
                             Container(
                                 padding: EdgeInsets.all(10),
                                 child: TextFormField(
+                                  controller: _nama,
                                   autofocus: true,
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
@@ -75,6 +83,7 @@ var confirmPass;
                             Container(
                               padding: EdgeInsets.all(10),
                               child: TextFormField(
+                                controller: _email,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: const InputDecoration(
                                     labelText: 'Email',
@@ -99,6 +108,7 @@ var confirmPass;
                             Container(
                               padding: EdgeInsets.all(10),
                               child: TextFormField(
+                                controller: _password,
                                 obscureText: true,
                                 decoration: const InputDecoration(
                                     labelText: 'Password',
@@ -147,6 +157,9 @@ var confirmPass;
                               child: ElevatedButton(
                                 onPressed: (){
                                   if (_formKey.currentState!.validate()) {
+                                    user.nama = _nama.text;
+                                    user.email = _email.text;
+                                    user.password = _password.text;
                                     // If the form is valid, display a snackbar. In the real world,
                                     // you'd often call a server or save the information in a database.
                                     /*
@@ -154,10 +167,10 @@ var confirmPass;
                                       const SnackBar(content: Text('Processing Data Register')),
                                     );
                                      */
-                                    Navigator.pop(context,
+                                    Navigator.push(context,
                                         MaterialPageRoute(
                                             builder: (BuildContext context){
-                                              return genrePage();
+                                              return PressLogin(user: user);
                                             }
                                         )
                                     );

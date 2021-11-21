@@ -1,6 +1,7 @@
 
 
-import 'package:bioskop_app/pages/genre.dart';
+import 'package:bioskop_app/Model/User.dart';
+import 'package:bioskop_app/pages/pressLogin.dart';
 import 'package:bioskop_app/pages/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import 'package:flutter/services.dart';
 
 class loginPage extends StatelessWidget{
   final _formKey = GlobalKey<FormState>();
-
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  final user = User(nama: '',email: '',password: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +55,7 @@ class loginPage extends StatelessWidget{
                 children: <Widget>[
                   Container(
                     child: TextFormField(
+                      controller: _email,
                       autofocus: true,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
@@ -81,7 +85,8 @@ class loginPage extends StatelessWidget{
                   ),
                   Container(
                     child: TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
+                      controller: _password,
+                      obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         hintText: 'Masukkan Password',
@@ -111,14 +116,15 @@ class loginPage extends StatelessWidget{
                     child: ElevatedButton(
                       onPressed: (){
                         if (_formKey.currentState!.validate()) {
+                          user.email = _email.text;
+                          user.password = _password.text;
                           // If the form is valid, display a snackbar. In the real world,
                           // you'd often call a server or save the information in a database.
-
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (BuildContext context){
-                                    return genrePage();
+                                    return PressLogin(user: user);
                                   }
                               )
                           );
