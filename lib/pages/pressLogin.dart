@@ -32,7 +32,7 @@ class PressLogin extends StatelessWidget{
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context)=>genrePage())
+                      MaterialPageRoute(builder: (context)=>genrePage( user: user,))
                   );
                 }
             )
