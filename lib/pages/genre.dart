@@ -1,247 +1,169 @@
-import 'dart:core';
-import 'package:flutter/material.dart';
-import '../Model/Preferensi.dart';
-import '../Model/User.dart';
-import '../Widget/Selectablebox.dart';
-import 'package:bioskop_app/Model/preferensi.dart';
-import 'package:bioskop_app/pages/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../Widget/selectablebox.dart';
+import '../model/user.dart';
+import 'dashboard.dart';
+import '../Model/preferensi.dart';
 
 class genrePage extends StatefulWidget{
-genreState createState()=> genreState();
-}
-class genreState extends State<genrePage>{
-  int checkedIndex =0;
-  int checkedIndex2 =0;
-  List<String> titleBahasa = [
-    "indonesia",
-    "china",
-    "Jawa",
-    "Japan",
-  ];
-
-  List<String> titleGenre = [
-    "Action",
-    "Fantasy",
-    "Adventure",
+  final List<String> genres = [
     "Horror",
-    "romance",
-    "Isekai",
+    "Music",
+    "Action",
+    "Drama",
+    "War",
+    "Crime"
   ];
-  List<String> genre=[];
-  String bahasa ='';
+  final List<String> languages = ["Bahasa", "English", "Japanese", "Korean"];
+
+  genreState createState() => genreState();
+}
+
+class genreState extends State<genrePage>{
+  User? user;
+
+  List<String> selectedGenre =[];
+  String selectedLanguage = 'English';
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = 75;
-    final double itemWidth = size.width / 2;
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Scaffold(
-            appBar: AppBar(
-              title: Text('ini Genre'),
-              iconTheme: IconThemeData(
-                  color: Colors.black
-              ),
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
-            ),
-            body: ListView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              children:<Widget>[
-                Container(
-                  margin:EdgeInsets.only(top: 10,left: 20),
-                  child: Text(
-                    'Hi '+ Preferensi().getNama + 'n/' +
-                    'Please Select',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  padding: EdgeInsets.only(left: 20),
+                  margin: EdgeInsets.only(top: 50),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(
+                      Icons.arrow_back,
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20,bottom: 20),
-                  child: Text(
-                    'Your Favorit Genre',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, top: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: 160,
+                    child: Text(
+                      'Hi '+Preferensi().getNama+' Select Your Four Favourite Genres',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
-                GridView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.all(10),
-                    itemCount: titleGenre.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: (itemWidth / itemHeight),
-                    ),
-                    itemBuilder: (BuildContext context, int index){
-                      genre.contains(titleGenre[index]);
-                      return buildCard(index);
-                    }
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  children: generateBoxGener(),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20,bottom: 20),
-                  child: Text(
-                    'Your Prefere',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, top: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: 160,
+                    child: Text(
+                      'Movie Language You Prefer?',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
-                GridView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.all(10),
-                    itemCount: titleBahasa.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: (itemWidth / itemHeight),
-                    ),
-                    itemBuilder: (BuildContext context, int index){
-                      bahasa = titleBahasa[index];
-                      return buildCard2(index);
-                    }
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  children: generateBoxLanguage(),
                 ),
-              ],
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                // Add your onPressed code here!
-                //SnackBarDisplay(bahasa,genre);
-                Preferensi().setGenre=genre;
-                Preferensi().setLanguage=bahasa;
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Nextpage()));
-              },
-              child: const Icon(Icons.arrow_forward_sharp),
-              backgroundColor: Colors.purple,
-            ),
-            bottomNavigationBar: BottomAppBar(
-              color: Colors.transparent,
-              elevation: 0.0,
-              child: Container(height: 50,),
-            ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          )
-        ],
-      ),
-    );
-  }
-  //Card2
-  Widget buildCard2(int index){
-    bool checked = index == checkedIndex;
-    String name = titleBahasa[index];
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          checkedIndex = index;
-          bahasa = titleBahasa[index];
-        });
-      },
-      child: Stack(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(5),
-            child: Card(
-              color: checked ? Colors.orange : Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
               ),
-              child: Container(
-                child: Center(child: Text(name)),
-              ),
-            ),
+              FloatingActionButton(
+                child: Icon(Icons.arrow_forward),
+                backgroundColor: Colors.purple,
+                elevation: 0,
+                onPressed: (){
+                  Preferensi().setGenre=selectedGenre;
+                  Preferensi().setLanguage=selectedLanguage;
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Movies()));
+                },
+              )
+            ],
           ),
-          Positioned(
-            top: 12,
-            right: 12,
-            child: Offstage(
-              offstage: !checked,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle
-                ),
-                child: Icon(
-                  Icons.check,
-                  color: Colors.green,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-  //card1
-  Widget buildCard(int index){
+        )
 
-    bool checked2 = index == checkedIndex2;
-    String name = titleGenre[index];
-    return GestureDetector(
-      onTap: () {
+    );
+  }
+
+  List<Widget> generateBoxLanguage(){
+    double mywidth =
+        (MediaQuery.of(context).size.width - 60 ) / 2;
+
+    return widget.languages.map(
+            (lang) => Selectablebox(
+          lang,
+          width: mywidth,
+          isSelected: selectedLanguage == lang,
+          onTap: (){
+            onSelectLanguage(lang);
+          },
+        )
+    ).toList();
+  }
+
+  void onSelectLanguage(String lang){
+    setState(() {
+      selectedLanguage = lang;
+    });
+  }
+
+  List<Widget> generateBoxGener(){
+    double mywidth =
+        (MediaQuery.of(context).size.width - 60 ) / 2;
+
+    return widget.genres.map(
+            (genre) => Selectablebox(
+          genre,
+          width: mywidth,
+          isSelected: selectedGenre.contains(genre),
+          onTap: (){
+            onSelectGenre(genre);
+          },
+        )
+    ).toList();
+
+  }
+
+  void onSelectGenre(String genre) {
+    if (selectedGenre.contains(genre)) {
+      setState(() {
+        selectedGenre.remove(genre);
+      });
+    } else {
+      if (selectedGenre.length < 4) {
         setState(() {
-          checkedIndex2 = index;
-          //genre.contains(titleGenre[index]);
+          selectedGenre.add(genre);
         });
-      },
-      child: Stack(
-        children: <Widget>[
-          Container(
-            height: 100,
-            padding: EdgeInsets.all(5),
-            child: Card(
-              elevation: 2,
-              color: checked2 ? Colors.orange : Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Container(
-                child: Center(child: Text(name)),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 12,
-            right: 12,
-            child: Offstage(
-              offstage: !checked2,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle
-                ),
-                child: Icon(
-                  Icons.check,
-                  color: Colors.green,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+      }
+    }
   }
-  void SnackBarDisplay(String bahasa, String genre){
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text('Genre : '+ genre +' dan bahasa : '+bahasa)
-      ),
-    );
-  }
+
+
 }
-
-
-

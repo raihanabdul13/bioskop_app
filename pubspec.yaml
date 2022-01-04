@@ -41,6 +41,7 @@ dev_dependencies:
   splashscreen: ^1.3.5
   http: ^0.13.0
   shared_preferences: ^2.0.7
+  carousel_slider: ^4.0.0
 # The following section is specific to Flutter.
 flutter:
 

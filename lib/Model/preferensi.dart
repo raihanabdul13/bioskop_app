@@ -36,4 +36,16 @@ class Preferensi{
 
   String get getLanguage => _sharedPreferences.getString('language') ?? '';
 
+  set setMoviesStatus(int status){
+    _sharedPreferences.setInt('Mstatus', status);
+  }
+
+  int get getMoviesStatus => _sharedPreferences.getInt('Mstatus') ?? 0;
+
+  set setMoviesID(int id){
+    _sharedPreferences.setInt('MID', id);
+  }
+
+  int get getMoviesID => _sharedPreferences.getInt('MID') ?? 0;
+
 }
