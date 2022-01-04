@@ -1,3 +1,8 @@
+import 'dart:core';
+import 'package:flutter/material.dart';
+import '../Model/Preferensi.dart';
+import '../Model/User.dart';
+import '../Widget/Selectablebox.dart';
 import 'package:bioskop_app/Model/preferensi.dart';
 import 'package:bioskop_app/pages/dashboard.dart';
 import 'package:flutter/cupertino.dart';
