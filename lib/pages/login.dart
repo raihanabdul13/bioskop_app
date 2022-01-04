@@ -1,5 +1,3 @@
-
-
 import 'package:bioskop_app/Model/User.dart';
 import 'package:bioskop_app/pages/pressLogin.dart';
 import 'package:bioskop_app/pages/register.dart';
@@ -7,11 +5,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class loginPage extends StatelessWidget{
+class loginPage extends StatefulWidget{
+  State<StatefulWidget> createState(){
+    return login();
+  }
+}
+class login extends State<loginPage>{
   final _formKey = GlobalKey<FormState>();
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
-  final user = User(nama: '',email: '',password: '');
+  final user = User('','','');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +22,14 @@ class loginPage extends StatelessWidget{
         children: <Widget>[
           Container(
             child: Image.asset(
-                'assets/logo.png',
+              'assets/logo.png',
               height: 100,
               alignment: Alignment.topLeft,
             ),
             padding: EdgeInsets.only(
-              top: 30,
-              bottom: 50,
-              left: 30
+                top: 30,
+                bottom: 50,
+                left: 30
             ),
           ),
           Container(
@@ -51,101 +54,102 @@ class loginPage extends StatelessWidget{
           ),
           Form(
             key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: TextFormField(
-                      controller: _email,
-                      autofocus: true,
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'Email Address',
-                        icon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Nama tidak boleh kosong';
-                        }
-                        if(!value.contains("@")){
-                          return 'Tidak terdapat @';
-                        }
-                        if(value.length > 50){
-                          return 'Name is so long, max 50 characters';
-                        }
-                      },
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: TextFormField(
+                    controller: _email,
+                    autofocus: true,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      hintText: 'Email Address',
+                      icon: Icon(Icons.email),
+                      border: OutlineInputBorder(),
                     ),
-                    padding: EdgeInsets.only(
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return 'Nama tidak boleh kosong';
+                      }
+                      if(!value.contains("@")){
+                        return 'Tidak terdapat @';
+                      }
+                      if(value.length > 50){
+                        return 'Name is so long, max 50 characters';
+                      }
+                    },
+                  ),
+                  padding: EdgeInsets.only(
                       top: 50,
                       left: 20,
                       right: 20,
                       bottom: 10
-                    ),
                   ),
-                  Container(
-                    child: TextFormField(
-                      controller: _password,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        hintText: 'Masukkan Password',
-                        icon: Icon(Icons.admin_panel_settings_sharp),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Nama tidak boleh kosong';
-                        }
-                        if(value.length < 8){
-                          return 'Password must be atleast 8 characters long';
-                        }
-                      },
+                ),
+                Container(
+                  child: TextFormField(
+                    controller: _password,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      hintText: 'Masukkan Password',
+                      icon: Icon(Icons.admin_panel_settings_sharp),
+                      border: OutlineInputBorder(),
                     ),
-                    padding: EdgeInsets.only(
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return 'Nama tidak boleh kosong';
+                      }
+                      if(value.length < 8){
+                        return 'Password must be atleast 8 characters long';
+                      }
+                    },
+                  ),
+                  padding: EdgeInsets.only(
                       top: 10,
                       bottom: 10,
                       left: 20,
                       right: 20
-                    ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: 30
-                    ),
-                    child: ElevatedButton(
-                      onPressed: (){
-                        if (_formKey.currentState!.validate()) {
-                          user.email = _email.text;
-                          user.password = _password.text;
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context){
-                                    return PressLogin(user: user);
-                                  }
-                              )
-                          );
-                          /*
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      top: 30
+                  ),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      if (_formKey.currentState!.validate()) {
+                        user.email = _email.text;
+                        user.password = _password.text;
+                        user.name = 'contoh';
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context){
+                                  return PressLogin(user: user);
+                                }
+                            )
+                        );
+                        /*
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Login')),
                           );
                            */
-                        }
-                      },
-                      child: Icon(Icons.arrow_forward_sharp,color:Colors.white),
-                      style: ElevatedButton.styleFrom(
+                      }
+                    },
+                    child: Icon(Icons.arrow_forward_sharp,color:Colors.white),
+                    style: ElevatedButton.styleFrom(
                         shape: CircleBorder(),
                         padding: EdgeInsets.all(20),
                         primary: Colors.deepPurple,
                         onPrimary: Colors.purple
-                      ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -178,7 +182,7 @@ class loginPage extends StatelessWidget{
                 child: Container(
                   padding: EdgeInsets.only(
                       top: 30,
-                    left: 5
+                      left: 5
                   ),
                   child:Text(
                     'Sign up',

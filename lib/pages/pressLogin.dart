@@ -22,7 +22,7 @@ class PressLogin extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(user.nama),
+            Text(user.name),
             Text(user.email),
             Text(user.password),
             FloatingActionButton(

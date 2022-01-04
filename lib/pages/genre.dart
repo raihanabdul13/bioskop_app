@@ -1,3 +1,5 @@
+import 'package:bioskop_app/Model/preferensi.dart';
+import 'package:bioskop_app/pages/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,14 +9,14 @@ genreState createState()=> genreState();
 class genreState extends State<genrePage>{
   int checkedIndex =0;
   int checkedIndex2 =0;
-  List titleBahasa = [
+  List<String> titleBahasa = [
     "indonesia",
     "china",
     "Jawa",
     "Japan",
   ];
 
-  List titleGenre = [
+  List<String> titleGenre = [
     "Action",
     "Fantasy",
     "Adventure",
@@ -22,7 +24,7 @@ class genreState extends State<genrePage>{
     "romance",
     "Isekai",
   ];
-  String genre='';
+  List<String> genre=[];
   String bahasa ='';
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class genreState extends State<genrePage>{
                 Container(
                   margin:EdgeInsets.only(top: 10,left: 20),
                   child: Text(
+                    'Hi '+ Preferensi().getNama + 'n/' +
                     'Please Select',
                     style: TextStyle(
                       fontSize: 20,
@@ -78,7 +81,7 @@ class genreState extends State<genrePage>{
                       childAspectRatio: (itemWidth / itemHeight),
                     ),
                     itemBuilder: (BuildContext context, int index){
-
+                      genre.contains(titleGenre[index]);
                       return buildCard(index);
                     }
                 ),
@@ -112,7 +115,10 @@ class genreState extends State<genrePage>{
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 // Add your onPressed code here!
-                SnackBarDisplay(bahasa,genre);
+                //SnackBarDisplay(bahasa,genre);
+                Preferensi().setGenre=genre;
+                Preferensi().setLanguage=bahasa;
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Nextpage()));
               },
               child: const Icon(Icons.arrow_forward_sharp),
               backgroundColor: Colors.purple,
@@ -130,7 +136,6 @@ class genreState extends State<genrePage>{
   }
   //Card2
   Widget buildCard2(int index){
-
     bool checked = index == checkedIndex;
     String name = titleBahasa[index];
     return GestureDetector(
@@ -184,7 +189,7 @@ class genreState extends State<genrePage>{
       onTap: () {
         setState(() {
           checkedIndex2 = index;
-          genre = titleGenre[index];
+          //genre.contains(titleGenre[index]);
         });
       },
       child: Stack(
